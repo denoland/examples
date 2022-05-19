@@ -8,7 +8,7 @@ Clone this repo and run it with:
 $ deno task run
 ```
 
-## Quickstart Tutorial
+# Quickstart Tutorial
 
 This tutorial will walk you through setting up a bare bones Todo app using Deno and React 18.
 
@@ -26,13 +26,13 @@ deno-react-todo-app/
 └── server.js
 ```
 
-### Managing Dependencies
+## Managing Dependencies
 
 While you can directly import modules in the file you need them, we will centralize all of them into two files: `deps.client.js` and `deps.server.js`. We separate them into client and server dependencies, because we only need to transpile the client side dependencies.
 
 Deno supports [importing modules via URL](https://deno.land/manual/linking_to_external_code). We'll use [esm.sh](https://esm.sh/), which provides npm packages via CDN. ([Learn more about using npm packages via CDN](https://deno.land/manual/node/cdns).)
 
-#### `deps.client.js`
+### `deps.client.js`
 
 This file includes all client-side dependencies. We'll include all React and React related modules, as well as [a Deno port of `nanoid`](https://deno.land/x/nanoid@v3.0.0), which we use to generate unique ids for each todo item.
 
@@ -47,7 +47,7 @@ export * as ReactDOMServer from "https://esm.sh/react-dom@alpha/server?dev";
 export { nanoid } from "https://deno.land/x/nanoid/mod.ts";
 ```
 
-#### `deps.server.js`
+### `deps.server.js`
 
 This file includes all server-side dependencies. We'll use [Oak](https://github.com/oakserver/oak) for a simple http server, [esbuild](https://github.com/evanw/esbuild) for bundling and transpiling, and [esbuild_deno_loader](https://github.com/lucacasonato/esbuild_deno_loader) for esbuild module resolution.
 
@@ -60,11 +60,11 @@ export * as esbuild from "https://deno.land/x/esbuild@v0.14.39/mod.js";
 export { denoPlugin } from "https://deno.land/x/esbuild_deno_loader@0.4.3/mod.ts";
 ```
 
-### `server.js`
+## `server.js`
 
 This file will handle bundling and transpiling of the React components with [esbuild](https://github.com/evanw/esbuild), as well as creating the web server with [Oak](https://github.com/oakserver/oak).
 
-#### Transpiling JSX with esbuild
+### Transpiling JSX with esbuild
 
 [JSX](https://reactjs.org/docs/introducing-jsx.html) makes writing React components easy, but browsers are unable to execute it directly. Most React apps use Babel, Parcel, Webpack, or some other tool to transpile JSX into vanilla JavaScript for the browser.
 
@@ -91,7 +91,7 @@ The key options to note:
 - `entryPoints`: This is the top level jsx file.
 - `outfile`: This is the bundled output js file, which will be loaded onto `index.html`.
 
-#### Configuring the server
+### Configuring the server
 
 Oak is a middleware http framework and router inspired by [Koa](https://github.com/koajs/koa).
 
@@ -128,11 +128,11 @@ app.use(router.allowedMethods());
 await app.listen({ port: 8000 });
 ```
 
-### React
+## React
 
 [React](https://reactjs.org/) is a declaritive UI framework that doesn't really need any server specific setup. All you need to get started is a way to write React components and a way to load them into an HTML file.
 
-#### `public/index.html`
+### `public/index.html`
 
 This is the main HTML page that will load the React components.
 
@@ -149,7 +149,7 @@ Two key lines in this file include:
 <div id="app" />
 ```
 
-#### `src/index.jsx`
+### `src/index.jsx`
 
 This is the top level jsx file that will take the React `App` component and bind it to `<div id="app" />` in the `index.html` file.
 
@@ -163,6 +163,6 @@ Note that `App` referenced above will be imported from `App.jsx`, which will con
 
 Since this quickstart is to setup React with Deno, we won't go over the ins and outs of how React works and how to write React components. For more in depth tutorial about React, [please refer to their website](https://reactjs.org/tutorial/tutorial.html).
 
-### Deploying to the Edge
+## Deploying to the Edge
 
 TODO

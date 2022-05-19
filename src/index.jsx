@@ -9,6 +9,6 @@ const DATA = [
   { id: "todo-2", name: "Repeat", completed: false },
 ];
 
-// Create react app.
+// Bind react app to <div id="app" />
 const root = ReactDOM.createRoot(document.getElementById("app"));
 root.render(<App tasks={DATA} />);

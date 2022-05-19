@@ -34,4 +34,5 @@ router.get("/src/index.js", async (ctx) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+// Start server.
 await app.listen({ port: 8000 });

@@ -1,8 +1,11 @@
+/** @jsx h */
 import { Application, Router } from "./deps.ts";
-import html from "./components/App.tsx";
+import html from "./src/App.tsx";
 
 const router = new Router();
-router.get("/", (ctx) => {
+
+// Index.html
+router.get("/", async (ctx) => {
   ctx.response.body = html;
 });
 

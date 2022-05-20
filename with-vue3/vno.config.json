@@ -1,0 +1,9 @@
+{
+  "root": "App",
+  "entry": "./",
+  "vue": 3,
+  "options": {
+    "title": "an example application"
+  },
+  "server": "./server.ts"
+}

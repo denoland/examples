@@ -12,8 +12,8 @@ await esbuild.default.build({
   outfile: "./src/index.js",
   bundle: true,
   format: "esm",
+  absWorkingDir: Deno.cwd()
 });
-esbuild.stop();
 
 // Setup server.
 const app = new Application();

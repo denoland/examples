@@ -1,5 +1,4 @@
-import { Application, denoPlugin, Router } from "./deps.server.ts";
-import * as esbuild from 'https://esm.sh/esbuild-wasm/esm/browser.js';
+import { Application, denoPlugin, Router, esbuild } from "./deps.server.ts";
 
 await esbuild.default.initialize({
   wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",

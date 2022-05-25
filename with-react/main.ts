@@ -1,14 +1,14 @@
 import { Application, denoPlugin, Router, esbuild } from "./deps.server.ts";
 
-await esbuild.default.initialize({
-  wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",
-  worker: false,
-});
+// await esbuild.default.initialize({
+//   wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",
+//   worker: false,
+// });
 // Transpile jsx to js for React.
-await esbuild.default.build({
+await esbuild.build({
   plugins: [denoPlugin()],
   entryPoints: ["./src/index.tsx"],
-  outfile: "./src/index.js",
+  outfile: "./public/index.js",
   bundle: true,
   format: "esm",
   absWorkingDir: Deno.cwd()
@@ -27,7 +27,7 @@ router.get("/", async (ctx) => {
 });
 
 // Bundled js file.
-router.get("/src/index.js", async (ctx) => {
+router.get("/public/index.js", async (ctx) => {
   return await ctx.send({
     root: `${Deno.cwd()}`,
   });

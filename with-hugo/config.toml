@@ -1,0 +1,4 @@
+baseURL = 'https://hugo-on-deploy.deno.dev/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = "ananke"

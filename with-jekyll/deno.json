@@ -1,5 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run -A https://deno.land/std@0.140.0/http/file_server.ts -p 4000 _site "
+    "build": "jekyll build",
+    "serve": "deno run -A https://deno.land/std@0.140.0/http/file_server.ts -p 4000 _site "
   }
 }

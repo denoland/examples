@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "build": "npm run build",
+    "dev": "npm run dev",
+    "serve": "deno run -A https://deno.land/std@0.140.0/http/file_server.ts dist"
+  }
+}

@@ -1,0 +1,15 @@
+
+# Build settings
+markdown:            kramdown
+highlighter:         rouge
+permalink:           none
+plugins:             [jekyll-sitemap, jekyll-feed, jekyll-seo-tag]
+
+sass:
+  sass_dir: assets/css
+  style: :compressed
+
+# Customise atom feed settings (this is where Jekyll-Feed gets configuration information)
+title:		           "Deno x Jekyll"
+description:	       "A simple framework for starting your own Jekyll project"
+author:              "Andy Jiang"

@@ -1,0 +1,8 @@
+
+# gatsby
+public
+.cache
+package-lock.json
+
+# node
+node_modules

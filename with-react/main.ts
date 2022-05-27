@@ -10,8 +10,8 @@ const output = await esbuild.default.build({
   entryPoints: ["./src/index.tsx"],
   write: false,
   bundle: true,
-  format: "esm",
-  absWorkingDir: Deno.cwd()
+  format: "esm"
+  // absWorkingDir: Deno.cwd()
 });
 // The raw transpiled output as a string.
 const indexJs = new TextDecoder().decode(output.outputFiles[0].contents);

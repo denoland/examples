@@ -1,40 +1,39 @@
-import { Application, denoPlugin, Router, esbuild } from "./deps.server.ts";
+import { Application, denoPlugin, esbuild } from "./deps.server.ts";
 
-// await esbuild.default.initialize({
-//   wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",
-//   worker: false,
-// });
 // Transpile jsx to js for React.
-await esbuild.build({
+await esbuild.default.initialize({
+  wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",
+  worker: false,
+});
+const output = await esbuild.default.build({
   plugins: [denoPlugin()],
   entryPoints: ["./src/index.tsx"],
-  outfile: "./public/index.js",
+  write: false,
   bundle: true,
   format: "esm",
   absWorkingDir: Deno.cwd()
 });
+// The raw transpiled output as a string.
+const indexJs = new TextDecoder().decode(output.outputFiles[0].contents);
 
 // Setup server.
 const app = new Application();
-const router = new Router();
 
-// Index.html
-router.get("/", async (ctx) => {
-  return await ctx.send({
-    root: `${Deno.cwd()}/public`,
-    index: "index.html",
-  });
+// Return transpiled script as HTML string.
+app.use((ctx) => {
+  ctx.response.body = `
+  <!doctype html>
+  <html>
+    <head>
+      <title>Deno + React</title>
+    </head>
+    <body>
+      <div id="app" />
+      <script>${indexJs}</script>
+    </body>
+  </html>
+  `;
 });
-
-// Bundled js file.
-router.get("/public/index.js", async (ctx) => {
-  return await ctx.send({
-    root: `${Deno.cwd()}`,
-  });
-});
-
-app.use(router.routes());
-app.use(router.allowedMethods());
 
 // Start server.
 console.log("Listening on http://localhost:8000");

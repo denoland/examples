@@ -3,6 +3,7 @@ import { Link, React } from "../../deps.client.ts";
 export function Footer() {
   return (
     <div>
+      <hr />
       <p>
         This app is part of a larger set of{" "}
         <Link to="https://github.com/denoland/examples">

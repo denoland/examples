@@ -3,9 +3,9 @@ import Koa from "https://esm.sh/koa@2.13.4";
 const app = new Koa();
 
 const db = {
-  tobi: { name: 'tobi', species: 'ferret' },
-  loki: { name: 'loki', species: 'ferret' },
-  jane: { name: 'jane', species: 'ferret' }
+  tobi: { name: "tobi", species: "ferret" },
+  loki: { name: "loki", species: "ferret" },
+  jane: { name: "jane", species: "ferret" },
 };
 
 const pets = {
@@ -15,9 +15,11 @@ const pets = {
       <div>
         <h1>Pets</h1>
         <ul>
-          ${names.map((name) => {
-            return `<li><a href="/pets/${name}">${name}</a></li>`;
-          })}
+          ${
+      names.map((name) => {
+        return `<li><a href="/pets/${name}">${name}</a></li>`;
+      })
+    }
         </ul>
       </div>
     `;
@@ -25,19 +27,19 @@ const pets = {
 
   show: (ctx, name) => {
     const pet = db[name];
-    if (!pet) return ctx.throw('Cannot find that pet', 404);
+    if (!pet) return ctx.throw("Cannot find that pet", 404);
     ctx.body = `
       <div>
         <h1>${pet.name} is a ${pet.species}</h1>
       </div>
     `;
-  }
+  },
 };
 
-app.use(_.get('/pets', pets.list));
-app.use(_.get('/pets/:name', pets.show));
+app.use(_.get("/pets", pets.list));
+app.use(_.get("/pets/:name", pets.show));
 
-app.use(ctx => {
+app.use((ctx) => {
   ctx.body = `
     <div>
       <h1>Deno x Koa</h1>

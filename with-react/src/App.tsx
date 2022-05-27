@@ -1,4 +1,4 @@
-import { React, Routes, Route, Navigate } from "../deps.client.ts";
+import { Navigate, React, Route, Routes } from "../deps.client.ts";
 import { NavBar } from "./components/NavBar.tsx";
 import { HomePage } from "./components/HomePage.tsx";
 import { AboutPage } from "./components/AboutPage.tsx";

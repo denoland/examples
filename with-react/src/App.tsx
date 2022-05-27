@@ -3,6 +3,7 @@ import { NavBar } from "./components/NavBar.tsx";
 import { HomePage } from "./components/HomePage.tsx";
 import { AboutPage } from "./components/AboutPage.tsx";
 import { UserPage } from "./components/UserPage.tsx";
+import { Footer } from "./components/Footer.tsx";
 
 export default function App(props) {
   return (
@@ -14,6 +15,7 @@ export default function App(props) {
         <Route path="/users/:username" element={<UserPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -1,7 +1,12 @@
 import { Application, denoPlugin, esbuild } from "./deps.server.ts";
 
-const text = await Deno.readTextFile(new URL(`file://${Deno.cwd()}/src/index.tsx`));
-console.log(text);
+const res = await Deno.readDir(".");
+for await (const v of res) {
+  console.log(v);
+}
+
+// const text = await Deno.readTextFile(new URL(`file://${Deno.cwd()}/src/index.tsx`));
+// console.log(text);
 
 // Transpile jsx to js for React.
 // await esbuild.default.initialize({

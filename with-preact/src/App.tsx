@@ -1,12 +1,23 @@
 /** @jsx h */
-import { Component, h, renderToString } from "../deps.ts";
-import { Hello } from "./components/Hello.tsx";
+import { Component, h, PreactRouter, renderToString } from "../deps.ts";
+import { HomePage } from "./components/HomePage.tsx";
+import { NavBar } from "./components/NavBar.tsx";
+import { UserPage } from "./components/UserPage.tsx";
+import { AboutPage } from "./components/AboutPage.tsx";
+import { Footer } from "./components/Footer.tsx";
 
 class App extends Component {
   render() {
     return (
-      <div id="app">
-        <Hello />
+      <div>
+        <NavBar />
+        <PreactRouter>
+          <HomePage path="/" />
+          <AboutPage path="/about" />
+          <UserPage path="/users/:username" />
+          <HomePage default />
+        </PreactRouter>
+        <Footer />
       </div>
     );
   }

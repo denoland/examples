@@ -15,7 +15,7 @@ export function HomePage() {
         <pre>
           $ deno run --allow-write --allow-net
           https://raw.githubusercontent.com/denoland/examples/main/init.ts
-          ./path/to/directory
+          with-react ./path/to/directory
         </pre>
       </p>
       <h2>Other Resources</h2>

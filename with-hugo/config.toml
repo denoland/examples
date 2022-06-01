@@ -1,4 +1,3 @@
-baseURL = 'https://hugo-on-deploy.deno.dev/'
+baseURL = 'https://examples-deno-hugo.deno.dev/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = "ananke"
+title = 'Deno x Hugo'

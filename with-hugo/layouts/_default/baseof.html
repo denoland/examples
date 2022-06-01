@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {{ .Site.Title }}
+    </title>
+  </head>
+  <body>
+    {{ partial "partials/header/site-nav.html" . }}
+    {{ block "main" . }}
+      <!-- The part of the page that begins to differ between templates -->
+    {{ end }}
+    {{ partial "partials/footer/site-footer.html" . }}
+  </body>
+</html>

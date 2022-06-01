@@ -1,13 +1,5 @@
 title: 'Deno x Jekyll'
-tagline: 'A Jekyll template hosted with Deno'
+tagline: 'A starter Jekyll website built with Deno'
 
 author:
-  name: 'Deno x Jekyll'
-
-menu:
-# Uncomment to activate the menu looping function in the header.html file under _includes
-#- {name: 'About', url: 'about.html'}
-
-social:
-# Uncomment to activate the social media icon looping function in the footer.html file under _includes
-#- {icon: 'github', link: 'https://www.github.com/lenpaul'}
+  name: 'Andy Jiang'

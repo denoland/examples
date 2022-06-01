@@ -1,11 +1,11 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import BlogHeader from '../components/BlogHeader.astro';
-import BlogPost from '../components/BlogPost.astro';
-
+import NavBar from '../components/NavBar.astro';
+import Page from '../components/Page.astro';
+import Footer from '../components/Footer.astro';
 
 const { content } = Astro.props;
-const { title, description, publishDate, author, heroImage, permalink, alt } = content;
+const { title, description, heroImage, permalink, alt } = content;
 ---
 
 <html lang={content.lang || 'en'}>
@@ -15,11 +15,12 @@ const { title, description, publishDate, author, heroImage, permalink, alt } = c
 	</head>
 
 	<body>
-		<BlogHeader />
+		<NavBar />
 		<div class="wrapper">
-			<BlogPost {title} {author} {heroImage} {publishDate} {alt}>
+			<Page {title} {heroImage} {alt}>
 				<slot />
-			</BlogPost>
+			</Page>
 		</div>
+		<Footer />
 	</body>
 </html>

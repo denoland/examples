@@ -1,5 +1,5 @@
 {
-  "name": "@example/blog",
+  "name": "deno-x-astro",
   "version": "0.0.1",
   "private": true,
   "scripts": {

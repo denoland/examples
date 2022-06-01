@@ -1,0 +1,23 @@
+---
+export interface Props {
+	title: string;
+	heroImage: string;
+	alt: string;
+}
+
+const { title, heroImage, alt } = Astro.props;
+---
+
+<div class="layout">
+	<article class="content">
+		<div>
+			<header>
+				{heroImage && <img width="720" height="420" class="hero-image" loading="lazy" src={heroImage} alt={alt} />}
+				<h1 class="title">{title}</h1>
+			</header>
+			<main>
+				<slot />
+			</main>
+		</div>
+	</article>
+</div>

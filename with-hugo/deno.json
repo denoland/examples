@@ -1,6 +1,6 @@
 {
   "tasks": {
     "build": "hugo",
-    "serve": "deno run -A https://deno.land/std@0.140.0/http/file_server.ts ./public"
+    "serve": "deno run -A https://deno.land/std@0.140.0/http/file_server.ts -p 8000 ./public"
   }
 }

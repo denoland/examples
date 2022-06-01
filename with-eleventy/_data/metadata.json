@@ -1,10 +1,10 @@
 {
-  "title": "Your Blog Name",
+  "title": "Deno x 11ty",
   "url": "https://example.com/",
   "language": "en",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "description": "A starter 11ty app built on Deno",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "A starter 11ty app built on Deno",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
     "id": "https://example.com/"

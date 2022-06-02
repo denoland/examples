@@ -6,12 +6,12 @@ export const HomePage = () => {
     <div>
       <h1>Deno x Preact</h1>
       <p>
-        This is an example of a React app running on{" "}
+        This is a starter Preact app running on{" "}
         <a href="https://deno.land/" target="_blank">Deno</a>.
       </p>
       <h2>Install</h2>
       <p>
-        You can scaffold this sample app on your local machine with the
+        You can scaffold this starter app on your local machine with the
         following command:
         <pre>
           $ deno run --allow-write --allow-net
@@ -23,15 +23,15 @@ export const HomePage = () => {
       <ul>
         <li>
           <a
-            href="https://github.com/denoland/examples/tree/main/with-react"
+            href="/getting-started"
             target="_blank"
           >
-            Quickstart Guide
+            Getting Started Guide
           </a>
         </li>
         <li>
           <a
-            href="https://github.com/denoland/examples/tree/main/with-react"
+            href="https://github.com/denoland/examples/tree/main/with-preact"
             target="_blank"
           >
             Source on GitHub

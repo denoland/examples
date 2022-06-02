@@ -1,12 +1,30 @@
 /** @jsx h */
-import { Application, Router } from "./deps.ts";
-import html from "./src/App.tsx";
+import { Application, Router, renderToString } from "./deps.ts";
+import App from "./src/App.tsx";
+
+// Make HTML string.
+export const makeHtml = (Page) => {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      </head>
+      <body>
+        ${renderToString(Page.render())}
+      </body>
+    </html>
+  `;
+};
+
 
 const router = new Router();
 
-// Index.html
+// App.
 router.get("/", async (ctx) => {
-  ctx.response.body = html;
+  // ctx.response.body = App;
+  ctx.response.body = makeHtml(App);
 });
 
 const app = new Application();

@@ -1,9 +1,9 @@
 /** @jsx h */
-import { Component, h, PreactRouter, renderToString } from "../deps.ts";
-import { HomePage } from "./components/HomePage.tsx";
+import { Component, h, PreactRouter } from "../deps.ts";
+import { HomePage } from "./pages/HomePage.tsx";
 import { NavBar } from "./components/NavBar.tsx";
-import { UserPage } from "./components/UserPage.tsx";
-import { AboutPage } from "./components/AboutPage.tsx";
+import { UserPage } from "./pages/UserPage.tsx";
+import { GettingStartedPage } from "./pages/GettingStartedPage.tsx";
 import { Footer } from "./components/Footer.tsx";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         <NavBar />
         <PreactRouter>
           <HomePage path="/" />
-          <AboutPage path="/about" />
+          <GettingStartedPage path="/getting-started" />
           <UserPage path="/users/:username" />
           <HomePage default />
         </PreactRouter>
@@ -24,19 +24,4 @@ class App extends Component {
 }
 
 // Instantiate app.
-const app = new App();
-
-// Form HTML.
-const html = `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    ${renderToString(app.render())}
-  </body>
-</html>`;
-
-export default html;
+export default new App();

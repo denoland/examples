@@ -4,8 +4,8 @@ import { h, Link } from "../../deps.ts";
 export const NavBar = () => {
   return (
     <ul>
-      <Link to="/">Home</Link> | <Link to="/about">About</Link> |{" "}
-      <Link to="/users/lambtron">User</Link>
+      <Link href="/">Home</Link> | <Link href="/getting-started">Getting Started</Link> |{" "}
+      <Link href="/users/lambtron">User</Link>
     </ul>
   );
 };

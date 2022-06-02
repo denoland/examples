@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, Link } from "../../deps.ts";
+import { h } from "../../deps.ts";
 
 export const Footer = () => {
   return (
@@ -7,9 +7,9 @@ export const Footer = () => {
       <hr />
       <p>
         This app is part of a larger set of{" "}
-        <Link to="https://github.com/denoland/examples">
+        <a href="https://github.com/denoland/examples">
           sample starter apps
-        </Link>{" "}
+        </a>{" "}
         that can help you get started with Deno and Deno Deploy.
       </p>
       <ul>
@@ -20,7 +20,7 @@ export const Footer = () => {
         </a>{" "}
         |{" "}
         <a
-          href="https://github.com/denoland/examples/tree/main/with-react"
+          href="https://github.com/denoland/examples/tree/main/with-preact"
           target="_blank"
         >
           View Source

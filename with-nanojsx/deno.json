@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "start": "deno run --allow-net main.ts"
+    "dev": "deno run --allow-net --no-check --watch main.tsx",
+    "serve": "deno run --allow-net --no-check main.tsx"
   },
   "compilerOptions": {
     "lib": [

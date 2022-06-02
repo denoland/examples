@@ -30,7 +30,7 @@ app.use((ctx) => {
     <!doctype html>
     <html>
       <head>
-        <title>Deno + React</title>
+        <title>Deno x React</title>
       </head>
       <body>
         <div id="app" />

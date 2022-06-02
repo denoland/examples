@@ -5,7 +5,7 @@ export function HomePage() {
     <div>
       <h1>Deno x React</h1>
       <p>
-        This is an example of a React app running on{" "}
+        This is a starter React app running on{" "}
         <a href="https://deno.land/" target="_blank">Deno</a>.
       </p>
       <h2>Install</h2>
@@ -22,7 +22,7 @@ export function HomePage() {
       <ul>
         <li>
           <a
-            href="https://github.com/denoland/examples/tree/main/with-react"
+            href="/getting-started"
             target="_blank"
           >
             Quickstart Guide

@@ -1,8 +1,8 @@
 import { Navigate, React, Route, Routes } from "../deps.client.ts";
 import { NavBar } from "./components/NavBar.tsx";
-import { HomePage } from "./components/HomePage.tsx";
-import { AboutPage } from "./components/AboutPage.tsx";
-import { UserPage } from "./components/UserPage.tsx";
+import { HomePage } from "./pages/HomePage.tsx";
+import { GettingStartedPage } from "./pages/GettingStartedPage.tsx";
+import { UserPage } from "./pages/UserPage.tsx";
 import { Footer } from "./components/Footer.tsx";
 
 export default function App(props) {
@@ -11,7 +11,7 @@ export default function App(props) {
       <NavBar />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/about" element={<AboutPage />} />
+        <Route exact path="/getting-started" element={<GettingStartedPage />} />
         <Route path="/users/:username" element={<UserPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

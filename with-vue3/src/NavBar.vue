@@ -1,0 +1,13 @@
+<template>
+  <ul>
+    <a href="/">Home</a> | <a href="/getting-started">Getting Started</a> |
+    <a href="/users/lambtron">Dynamic Routes</a>
+  </ul>
+</template>
+
+
+<script>
+export default {
+  name: 'navbar',
+};
+</script>

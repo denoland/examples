@@ -11,4 +11,4 @@ package-lock.json
 .npm
 
 # eleventy
-_site
+# _site

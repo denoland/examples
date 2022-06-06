@@ -38,13 +38,11 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run build
-      - run: ls -la
-      - run: pwd
       - uses: denoland/deployctl@v1
         with:
           project: example-deno-eleventy
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
-          root: _site
+          root: with-eleventy/_site
   hugo:
     name: Deploy Hugo
     defaults:

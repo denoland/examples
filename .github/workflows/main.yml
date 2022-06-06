@@ -11,17 +11,37 @@ on:
   workflow_dispatch:
 
 jobs:
-  # astro:
-  #   name: Deploy Astro
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Setup Astro
-  #       uses: 
+  astro:
+    name: Deploy Astro
+    defaults:
+      run:
+        working-directory: with-astro
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Setup Astro
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: examples-deno-astro
+          entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
+          root: with-astro/public
+
   eleventy:
     name: Deploy Eleventy
     defaults:

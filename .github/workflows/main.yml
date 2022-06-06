@@ -102,8 +102,10 @@ jobs:
 
       - name: Build
         uses: vivi90/jekyll-minimal-action@v1.1.0
+        with:
+          command: jekyll build
 
-      - run: pwd && jekyll build && ls -la
+      - run: pwd && ls -la
 
       - name: Deploy
         uses: denoland/deployctl@v1

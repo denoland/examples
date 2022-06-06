@@ -38,6 +38,8 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run build
+      - run: ls -la
+      - run: pwd
       - uses: denoland/deployctl@v1
         with:
           project: example-deno-eleventy

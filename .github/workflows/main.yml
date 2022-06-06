@@ -79,8 +79,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Build
-        uses: jerryjvl/jekyll-build-action@v1
+        uses: vivi90/jekyll-minimal-action@v1.1.0
+        with:
+          command: jekyll build
+
       - name: Deploy
         uses: denoland/deployctl@v1
         with:

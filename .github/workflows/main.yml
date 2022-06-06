@@ -40,7 +40,7 @@ jobs:
       - run: npm run build
       - uses: denoland/deployctl@v1
         with:
-          project: example-deno-eleventy
+          project: examples-deno-eleventy
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
           root: with-eleventy/_site
   hugo:
@@ -64,9 +64,9 @@ jobs:
       - name: Deploy
         uses: denoland/deployctl@v1
         with:
-          project: example-deno-hugo
+          project: examples-deno-hugo
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
-          root: public
+          root: with-hugo/public
   jekyll:
     name: Deploy Jekyll
     defaults:
@@ -84,7 +84,7 @@ jobs:
       - name: Deploy
         uses: denoland/deployctl@v1
         with:
-          project: example-deno-jekyll
+          project: examples-deno-jekyll
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
-          root: _site
+          root: with-jekyll/_site
 

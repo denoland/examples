@@ -34,11 +34,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build
-        uses: TartanLlama/actions-eleventy@v1.3
+        uses: actions/setup-node@v3
         with:
-          args: --output _dist
-          install_dependencies: true
+          node-version: 16
+      - run: npm install
+      - run: curl -fsSL https://deno.land/x/install/install.sh | sh
+      - run: deno task build
       - name: Deploy
         uses: denoland/deployctl@v1
         with:

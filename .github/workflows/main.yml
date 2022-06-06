@@ -38,10 +38,9 @@ jobs:
         with:
           node-version: 16
       - run: npm install
-      - run: curl -fsSL https://deno.land/x/install/install.sh | sh
-      - run: deno task build
+      - run: npm run build
       - name: Deploy
-        uses: denoland/deployctl@v1
+      - uses: denoland/deployctl@v1
         with:
           project: example-deno-eleventy
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts

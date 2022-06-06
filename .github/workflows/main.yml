@@ -105,6 +105,8 @@ jobs:
         with:
           command: cd with-jekyll && jekyll build
 
+      - run: pwd
+
       - name: Deploy
         uses: denoland/deployctl@v1
         with:

@@ -1,0 +1,83 @@
+name: Deploy Examples
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # astro:
+  #   name: Deploy Astro
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     id-token: write
+  #     contents: read
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Astro
+  #       uses: 
+  eleventy:
+    name: Deploy Eleventy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        uses: TartanLlama/actions-eleventy@v1.3
+        with:
+          args: --output _dist
+          install_dependencies: true
+      - name: Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: example-deno-eleventy
+          entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
+          root: _site
+  hugo:
+    name: Deploy Hugo
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+      - name: Build
+        run: hugo --minify
+      - name: Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: example-deno-hugo
+          entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
+          root: public
+  jekyll:
+    name: Deploy Jekyll
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        uses: jerryjvl/jekyll-build-action@v1
+      - name: Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: example-deno-jekyll
+          entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
+          root: _site
+

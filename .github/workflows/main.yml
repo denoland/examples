@@ -19,18 +19,21 @@ jobs:
   #     contents: read
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v2
+  #       uses: actions/checkout@v3
   #     - name: Setup Astro
   #       uses: 
   eleventy:
     name: Deploy Eleventy
+    defaults:
+      run:
+        working-directory: with-eleventy
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Build
         uses: TartanLlama/actions-eleventy@v1.3
         with:
@@ -44,13 +47,16 @@ jobs:
           root: _site
   hugo:
     name: Deploy Hugo
+    defaults:
+      run:
+        working-directory: with-hugo
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -65,13 +71,16 @@ jobs:
           root: public
   jekyll:
     name: Deploy Jekyll
+    defaults:
+      run:
+        working-directory: with-jekyll
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Build
         uses: jerryjvl/jekyll-build-action@v1
       - name: Deploy

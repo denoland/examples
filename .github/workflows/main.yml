@@ -103,7 +103,7 @@ jobs:
       - name: Build
         uses: vivi90/jekyll-minimal-action@v1.1.0
 
-      - run: cd with-jekyll && jekyll build && ls -la && pwd
+      - run: pwd && jekyll build && ls -la
 
       - name: Deploy
         uses: denoland/deployctl@v1

@@ -111,7 +111,6 @@ jobs:
           source: with-jekyll
           destination: _site
 
-      - run: cd with-jekyll && pwd && ls -la
 
       - name: Deploy
         uses: denoland/deployctl@v1

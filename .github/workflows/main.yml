@@ -53,13 +53,22 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install
-      - run: npm run build
-      - uses: denoland/deployctl@v1
+
+      - name: Install
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: denoland/deployctl@v1
         with:
           project: examples-deno-eleventy
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
@@ -78,12 +87,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
+
       - name: Build
         run: hugo --minify
+
       - name: Deploy
         uses: denoland/deployctl@v1
         with:
@@ -110,7 +122,6 @@ jobs:
         with:
           source: with-jekyll
           destination: _site
-
 
       - name: Deploy
         uses: denoland/deployctl@v1

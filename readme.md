@@ -1,6 +1,6 @@
 # Examples
 
-Starter apps built in web frameworks with Deno.
+Starter apps built in various web frameworks with Deno.
 
 ![Under construction](https://stryvemarketing.com/wp-content/uploads/2016/04/image.gif)
 
@@ -8,22 +8,22 @@ Starter apps built in web frameworks with Deno.
 
 ### Static-site generators
 
-- Hugo
+- [Hugo](https://examples-deno-hugo.deno.dev)
+- [11ty](https://examples-deno-eleventy.deno.dev)
+- [Jekyll](https://examples-deno-jekyll.deno.dev)
+- [Astro](https://examples-deno-astro.deno.dev)
 - Gatsby
-- 11ty
-- Jekyll
-- Astro
 - Lume
 - Fresh
 
 ### Front-end frameworks
 
-- React
-- Preact
-- NanoJSX
-- Vue3
+- [React](https://examples-deno-react.deno.dev)
+- [Preact](https://examples-deno-preact.deno.dev)
+- [NanoJSX](https://examples-deno-nanojsx.deno.dev)
+- [Vue3](https://examples-deno-vue3.deno.dev)
 - Solid
-- Astro
+- [Astro](https://examples-deno-astro.deno.dev)
 - Gatsby
 
 ### Full-stack frameworks

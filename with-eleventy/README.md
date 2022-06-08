@@ -57,7 +57,7 @@ Host this website on the edge with [Deno Deploy](https://deno.com/deploy).
 Create a `main.yml` file under the directory `.github/workflows`:
 
 ```yaml
-name: Deploy Hugo to Deno Deploy
+name: Deploy 11ty to Deno Deploy
 
 # Controls when the workflow will run
 on:
@@ -82,10 +82,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
-        with:
-          submodules: true # Fetch Hugo themes (true or recursive)
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+        uses: actions/checkout@v3
 
       - name: Install node
         uses: actions/setup-node@v3
@@ -101,7 +98,7 @@ jobs:
       - name: Deploy
         uses: denoland/deployctl@v1
         with:
-          project: examples-deno-eleventy
+          project: {YOUR PROJECT NAME}
           entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
           root: _site
 ```

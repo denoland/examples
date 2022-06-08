@@ -2,11 +2,11 @@
 
 Starter apps built in various web frameworks with Deno.
 
+The links will take you to a working demo, which includes instructions on how to get started quickly.
+
 ![Under construction](https://stryvemarketing.com/wp-content/uploads/2016/04/image.gif)
 
-## Starter apps
-
-### Static-site generators
+## Static-site generators
 
 - [Hugo](https://examples-deno-hugo.deno.dev)
 - [11ty](https://examples-deno-eleventy.deno.dev)
@@ -16,25 +16,25 @@ Starter apps built in various web frameworks with Deno.
 - Lume
 - Fresh
 
-### Front-end frameworks
+## Front-end frameworks
 
 - [React](https://examples-deno-react.deno.dev)
 - [Preact](https://examples-deno-preact.deno.dev)
 - [NanoJSX](https://examples-deno-nanojsx.deno.dev)
-- [Vue3](https://examples-deno-vue3.deno.dev)
-- Solid
 - [Astro](https://examples-deno-astro.deno.dev)
+- Vue3
+- Solid
 - Gatsby
 
-### Full-stack frameworks
+## Full-stack frameworks
 
 - RedwoodJS
 - Gatsby
 
-### Server-side frameworks
+## Server-side frameworks
 
-- Express
 - Koa
+- Express
 - Oak
 - Opine
 - Drash

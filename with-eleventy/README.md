@@ -1,80 +1,111 @@
-# eleventy-base-blog
+# Deno x 11ty
 
-A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator.
+[A starter 11ty site on Deno](https://examples-deno-eleventy.deno.dev/).
 
-[![Build Status](https://travis-ci.org/11ty/eleventy-base-blog.svg?branch=master)](https://travis-ci.org/11ty/eleventy-base-blog)
+## Install
 
-## Demos
-
-* [Netlify](https://eleventy-base-blog.netlify.com/)
-* [GitHub Pages](https://11ty.github.io/eleventy-base-blog/)
-* [Remix on Glitch](https://glitch.com/~11ty-eleventy-base-blog)
-
-## Deploy this to your own site
-
-Deploy this Eleventy site in just a few clicks on these services:
-
-* [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
-* [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
-
-Or, read more about [Deploying an Eleventy project](https://www.11ty.dev/docs/deployment/).
-
-## Getting Started
-
-### 1. Clone this Repository
+You can scaffold this app on your local machine with the following command.
 
 ```
-git clone https://github.com/11ty/eleventy-base-blog.git my-blog-name
+$ deno run --allow-write --allow-net https://raw.githubusercontent.com/denoland/examples/main/init.ts with-eleventy ./path/to/directory
 ```
 
+## Getting started
 
-### 2. Navigate to the directory
+To run this locally, you'll need:
+- [11ty](https://www.11ty.dev/)
+- [Deno](https://deno.land)
 
-```
-cd my-blog-name
-```
+Build the website:
 
-Specifically have a look at `.eleventy.js` to see if you want to configure any Eleventy options differently.
-
-### 3. Install dependencies
-
-```
-npm install
-```
-
-### 4. Edit _data/metadata.json
-
-### 5. Run Eleventy
-
-```
-npx eleventy
+```shell
+$ npx @11ty/eleventy
+# or
+$ deno task build
 ```
 
-Or build and host locally for local development
+Run the server locally:
+
 ```
-npx eleventy --serve
+$ deno task serve
 ```
 
-Or build automatically when a template changes:
-```
-npx eleventy --watch
+Your site should be available to view at https://localhost:8000.
+
+[Learn more about building 11ty websites](https://www.11ty.dev/docs/tutorials/).
+
+## Hosting
+
+### Deno Deploy
+
+Host this website on the edge with [Deno Deploy](https://deno.com/deploy).
+
+1. Create a GitHub repo
+
+- Create a GitHub repo
+- Copy the git remote address
+- Run `git init` in your directory
+- Run `git remote add origin {remote}`
+- Push the repository to GitHub.
+
+2. [Create a Deno Deploy project](https://deno.com/deploy/docs/projects#creating-a-project)
+
+3. [Connect the GitHub repo to the Deno Deploy project](https://deno.com/deploy/docs/projects#git-integration)
+
+4. [Add a GitHub Action](https://deno.com/deploy/docs/deployctl#deployctl-github-action)
+
+Create a `main.yml` file under the directory `.github/workflows`:
+
+```yaml
+name: Deploy Hugo to Deno Deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more
+# jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Allows authentication with Deno Deploy.
+      contents: read # Allows cloning the repo.
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true or recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: examples-deno-eleventy
+          entrypoint: https://deno.land/std@0.131.0/http/file_server.ts
+          root: _site
 ```
 
-Or in debug mode:
-```
-DEBUG=* npx eleventy
-```
+Next time you push to your `main` GitHub branch, this Actions workflow will build and deploy to Deno Deploy.
 
-### Implementation Notes
-
-* `about/index.md` shows how to add a content page.
-* `posts/` has the blog posts but really they can live in any directory. They need only the `post` tag to be added to this collection.
-* Add the `nav` tag to add a template to the top level site navigation. For example, this is in use on `index.njk` and `about/index.md`.
-* Content can be any template format (blog posts needn’t be markdown, for example). Configure your supported templates in `.eleventy.js` -> `templateFormats`.
-	* Because `css` and `png` are listed in `templateFormats` but are not supported template types, any files with these extensions will be copied without modification to the output (while keeping the same directory structure).
-* The blog post feed template is in `feed/feed.njk`. This is also a good example of using a global data files in that it uses `_data/metadata.json`.
-* This example uses three layouts:
-  * `_includes/layouts/base.njk`: the top level HTML structure
-  * `_includes/layouts/home.njk`: the home page template (wrapped into `base.njk`)
-  * `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
-* `_includes/postlist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `index.njk` has an example of how to use it.
+- [Documentation about our GitHub Action deployctl](https://deno.com/deploy/docs/deployctl).

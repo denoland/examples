@@ -4,7 +4,7 @@ description: Getting started with Hugo on Deno.
 layout: index.html
 ---
 
-# Installation
+## Installation
 
 To run this locally, you'll need:
 - [Hugo](https://gohugo.io)
@@ -34,19 +34,25 @@ Your site should be available to view at https://localhost:8000.
 
 [Learn more about building Hugo websites](https://gohugo.io/getting-started/).
 
-# Hosting
+## Hosting
 
-## Deno Deploy
+### Deno Deploy
 
 Host this website on the edge with Deno Deploy.
 
 1. Create a GitHub repo
 
-2. Create a Deno Deploy project.
+- Create a GitHub repo
+- Copy the git remote
+- Run `git init` in your directory
+- Run `git remote add origin {remote}`
+- Push the repository to GitHub.
 
-3. Connect the GitHub repo to the Deno Deploy project.
+2. [Create a Deno Deploy project](https://deno.com/deploy/docs/projects#creating-a-project)
 
-4. Add a GitHub Action
+3. [Connect the GitHub repo to the Deno Deploy project](https://deno.com/deploy/docs/projects#git-integration)
+
+4. [Add a GitHub Action](https://deno.com/deploy/docs/deployctl#deployctl-github-action)
 
 Create a `main.yml` file under the directory `.github/workflows`:
 

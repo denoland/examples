@@ -1,40 +1,21 @@
 # Examples
 
-Starter apps built in various web frameworks with Deno.
+These are examples using Deno with a specific framework, module, or tool.
 
-The links will take you to a working demo, which includes instructions on how to get started quickly.
+For further guidance, please refer to each example's readme.
 
-![Under construction](https://stryvemarketing.com/wp-content/uploads/2016/04/image.gif)
+For general instructions on using Deno, please refer to
+[the Manual](https://deno.land/manual).
 
-## Static-site generators
+## Data Persistence
 
-- [Hugo](https://examples-deno-hugo.deno.dev)
-- [11ty](https://examples-deno-eleventy.deno.dev)
-- [Jekyll](https://examples-deno-jekyll.deno.dev)
-- [Astro](https://examples-deno-astro.deno.dev)
-- Gatsby
-- Lume
-- Fresh
+- [Apollo](https://github.com/denoland/examples/tree/main/with-apollo)
+- [Mongoose](https://github.com/denoland/examples/tree/main/with-mongoose)
+- [MySQL2](https://github.com/denoland/examples/tree/main/with-mysql2)
+- [PlanetScale](https://github.com/denoland/examples/tree/main/with-planetscale)
+- [Prisma](https://github.com/denoland/examples/tree/main/with-prisma)
 
-## Front-end frameworks
+## Frontend Frameworks
 
-- [React](https://examples-deno-react.deno.dev)
-- [Preact](https://examples-deno-preact.deno.dev)
-- [NanoJSX](https://examples-deno-nanojsx.deno.dev)
-- [Astro](https://examples-deno-astro.deno.dev)
-- Vue3
-- Solid
-- Gatsby
-
-## Full-stack frameworks
-
-- RedwoodJS
-- Gatsby
-
-## Server-side frameworks
-
-- Koa
-- Express
-- Oak
-- Opine
-- Drash
+- [React](https://github.com/denoland/examples/tree/main/with-react)
+- [Vue](https://github.com/denoland/examples/tree/main/with-vue)

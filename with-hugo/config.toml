@@ -1,3 +1,0 @@
-baseURL = 'https://examples-deno-hugo.deno.dev/'
-languageCode = 'en-us'
-title = 'Deno x Hugo'

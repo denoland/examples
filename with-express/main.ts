@@ -13,14 +13,15 @@ app.get("/api", (req, res) => {
 
 app.get("/api/:dinosaur", (req, res) => {
   if (req?.params?.dinosaur) {
-    const found = data.find(item => item.name.toLowerCase() === req.params.dinosaur.toLowerCase());
+    const found = data.find((item) =>
+      item.name.toLowerCase() === req.params.dinosaur.toLowerCase()
+    );
     if (found) {
       res.send(found);
-      } else {
+    } else {
       res.send("No dinosaurs found.");
     }
   }
 });
 
 app.listen(8000);
-

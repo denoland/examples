@@ -19,3 +19,9 @@ For general instructions on using Deno, please refer to
 
 - [React](https://github.com/denoland/examples/tree/main/with-react)
 - [Vue](https://github.com/denoland/examples/tree/main/with-vue)
+
+## Cloud Deployments
+
+- [Digital Ocean](https://github.com/denoland/examples/tree/main/on-digital-ocean)
+- [AWS Lightsail](https://github.com/denoland/examples/tree/main/on-aws-lightsail)
+- [Google Cloud Run](https://github.com/denoland/examples/tree/main/on-google-cloud-run)

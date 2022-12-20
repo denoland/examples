@@ -1,3 +1,4 @@
+import "https://deno.land/std/node/global.ts";
 import mongoose from "npm:mongoose@^6.7";
 import Dinosaur from "./model/Dinosaur.ts";
 

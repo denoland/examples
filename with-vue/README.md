@@ -357,3 +357,7 @@ Let's run it and see what we get so far:
 ![Clicking on a dinosaur to get to an individual dinosaur page](/static/vue-demo.gif)
 
 Awesome!
+
+## Troubleshooting
+
+1. If app does not work by running `deno task dev` then try setting deno version to `deno upgrade --version 1.32.3` .

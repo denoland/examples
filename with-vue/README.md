@@ -24,7 +24,7 @@ deno task dev
 
 You should now be able to view your default Deno and Vue app in your browser:
 
-![default vue app](/static/default-vue-app.png)
+![default vue app](https://raw.githubusercontent.com/denoland/examples/main/with-vue/static/default-vue-app.png)
 
 ## Add a backend
 
@@ -32,7 +32,7 @@ The next step is to add a backend API. We'll create a very simple API that
 returns information about dinosaurs.
 
 In the directory, let's create an `api` folder. In that folder, we'll create a
-`main.ts` file, which will run the server, and a `data.json`, which is the hard
+`main.ts` file, which will run the server, and a `data.json` , which is the hard
 coded data.
 
 ```
@@ -41,9 +41,9 @@ mkdir api && touch api/data.json && touch api/main.ts
 
 Copy and paste
 [this json file](https://github.com/denoland/deno-vue-example/blob/main/api/data.json)
-into your `api/data.json`.
+into your `api/data.json` .
 
-Then, let's update `api/main.ts`:
+Then, let's update `api/main.ts` :
 
 ```ts
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
@@ -79,27 +79,27 @@ app.use(router.allowedMethods());
 await app.listen({ port: 8000 });
 ```
 
-This is a very simple API server using [`oak`](https://deno.land/x/oak) that
+This is a very simple API server using [ `oak` ](https://deno.land/x/oak) that
 will return dinosaur information based on the route. Let's start the API server:
 
 ```
 deno run --allow-env --allow-net api/main.ts
 ```
 
-If we go to `localhost:8000/api`, we see:
+If we go to `localhost:8000/api` , we see:
 
-![json response of dinosaurs](/static/api-response.png)
+![json response of dinosaurs](https://raw.githubusercontent.com/denoland/examples/main/with-vue/static/api-response.png)
 
 Lookin' good so far.
 
 ## Add Vue components
 
-Let's update `src/components`. We'll add the files:
+Let's update `src/components` . We'll add the files:
 
-- `HomePage.vue`, the component for the home page
-- `Dinosaurs.vue`, the component that lists all dinosaur names as anchor links,
+* `HomePage.vue`, the component for the home page
+* `Dinosaurs.vue`, the component that lists all dinosaur names as anchor links, 
   and
-- `Dinosaur.vue`, the component that shows an individual dinosaur's name and
+* `Dinosaur.vue`, the component that shows an individual dinosaur's name and
   description
 
 ```
@@ -110,7 +110,7 @@ Before we create the components, let's add some state management.
 
 ## Maintain state with `store`
 
-In order to maintain state across our `<Dinosaur>` and `<Dinosaurs>` components,
+In order to maintain state across our `<Dinosaur>` and `<Dinosaurs>` components, 
 we'll use [Vue store](https://vuejs.org/guide/scaling-up/state-management.html).
 Note for more complex state management, check out the Vue-endorsed
 [Pinia](https://pinia.vuejs.org/) library.
@@ -124,14 +124,16 @@ touch src/store.js
 And in it, let's add:
 
 ```js
-import { reactive } from "vue";
+import {
+    reactive
+} from "vue";
 
 export const store = reactive({
-  dinosaur: {},
-  setDinosaur(name, description) {
-    this.dinosaur.name = name;
-    this.dinosaur.description = description;
-  },
+    dinosaur: {},
+    setDinosaur(name, description) {
+        this.dinosaur.name = name;
+        this.dinosaur.description = description;
+    },
 });
 ```
 
@@ -140,13 +142,13 @@ retrieve dinosaur name and description.
 
 ## Update Vue components
 
-In `Dinosaurs.vue`, we'll three things:
+In `Dinosaurs.vue` , we'll three things:
 
-- send a `GET` request to our API and return that as `dinosaurs`
-- iterate through `dinosaurs` and render each `dinosaur` in `<router-link>` that
+* send a `GET` request to our API and return that as `dinosaurs`
+* iterate through `dinosaurs` and render each `dinosaur` in `<router-link>` that
   points to the `<Dinosaur>` component
-- add `store.setDinosaur()` to `@click` on each `dinosaur`, which will set the
-  `store`
+* add `store.setDinosaur()` to `@click` on each `dinosaur`, which will set the
+ `store`
 
 Here is the complete code below:
 
@@ -198,10 +200,10 @@ export default ({
 </style>
 ```
 
-In `Dinosaur.vue`, we'll add:
+In `Dinosaur.vue` , we'll add:
 
-- importing `store`
-- rendering `store.dinosaur` in the HTML
+* importing `store`
+* rendering `store.dinosaur` in the HTML
 
 ```vue
 <script>
@@ -222,9 +224,9 @@ export default {
 </template>
 ```
 
-Next, we'll update `HomePage.vue`. Since the `Dinosaurs` component needs to
+Next, we'll update `HomePage.vue` . Since the `Dinosaurs` component needs to
 fetch the data from the API, we'll use
-[`<Suspense>`](https://vuejs.org/guide/built-ins/suspense.html), which manages
+[ `<Suspense>` ](https://vuejs.org/guide/built-ins/suspense.html), which manages
 async dependencies in a component tree.
 
 ```vue
@@ -264,7 +266,7 @@ export default {
 </style>
 ```
 
-Tying it all together, let's update `src/App.vue`:
+Tying it all together, let's update `src/App.vue` :
 
 ```vue
 <script setup>
@@ -280,8 +282,8 @@ Tying it all together, let's update `src/App.vue`:
 
 ## Add routing
 
-You'll notice that we have used `<router-link>` and `<router-view>`. These
-components are part of the [`vue-router` library](https://router.vuejs.org/),
+You'll notice that we have used `<router-link>` and `<router-view>` . These
+components are part of the [ `vue-router` library](https://router.vuejs.org/), 
 which we'll have to setup and configure in another file.
 
 First, let's import `vue-router` in our `vite.config.mjs` file:
@@ -299,15 +301,15 @@ export default defineConfig({
 });
 ```
 
-Next, let's create a folder named `router`. In it, let's create `index.ts`:
+Next, let's create a folder named `router` . In it, let's create `index.ts` :
 
 ```
 mkdir router && touch router/index.ts
 ```
 
-In `router/index.ts`, we'll create `router`, which contains information about
+In `router/index.ts` , we'll create `router` , which contains information about
 each route and their component, and export it. For more information on using
-`vue-router`, check out their [guide](https://router.vuejs.org/guide).
+`vue-router` , check out their [guide](https://router.vuejs.org/guide).
 
 ```ts
 import { createRouter, createWebHistory } from "vue-router";
@@ -337,7 +339,7 @@ export default router;
 ```
 
 Next, in our `src/main.ts` file, which contains all of the logic for the
-frontend app, we'll have to import and use `router`:
+frontend app, we'll have to import and use `router` :
 
 ```ts
 import { createApp } from "vue";

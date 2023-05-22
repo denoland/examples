@@ -1,6 +1,18 @@
-
-import { Application, Router, Context, helpers } from "https://deno.land/x/oak@v12.4.0/mod.ts";
-import { getAllUsers, upsertUser, updateUserAndAddress, getUserByEmail, getUserById, deleteUserById, getAddressByUserId } from "./db.ts";
+import {
+  Application,
+  Context,
+  helpers,
+  Router,
+} from "https://deno.land/x/oak@v12.4.0/mod.ts";
+import {
+  deleteUserById,
+  getAddressByUserId,
+  getAllUsers,
+  getUserByEmail,
+  getUserById,
+  updateUserAndAddress,
+  upsertUser,
+} from "./db.ts";
 
 const { getQuery } = helpers;
 const router = new Router();
@@ -9,7 +21,7 @@ router
   .get("/users", async (ctx: Context) => {
     ctx.response.body = await getAllUsers();
   })
-  .get("/users/:id", async (ctx: Context)=> {
+  .get("/users/:id", async (ctx: Context) => {
     const { id } = getQuery(ctx, { mergeParams: true });
     ctx.response.body = await getUserById(id);
   })
@@ -36,7 +48,7 @@ router
   .delete("/users/:id", async (ctx: Context) => {
     const { id } = getQuery(ctx, { mergeParams: true });
     await deleteUserById(id);
-  })
+  });
 
 const app = new Application();
 

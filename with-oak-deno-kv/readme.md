@@ -1,10 +1,14 @@
 # Oak API with Deno KV
 
 This is an example API that shows:
+
 - API routes with [Oak](https://deno.land/x/oak)
-- Deno KV with [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
-- Deno KV with [secondary indices](https://deno.com/manual/runtime/kv/secondary_indexes)
-- Deno KV with [atomic transactions](https://deno.com/manual/runtime/kv/transactions)
+- Deno KV with
+  [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+- Deno KV with
+  [secondary indices](https://deno.com/manual/runtime/kv/secondary_indexes)
+- Deno KV with
+  [atomic transactions](https://deno.com/manual/runtime/kv/transactions)
 - ~Deno KV with filtering~
 - ~Deno KV with pagination~
 
@@ -18,7 +22,8 @@ deno task dev
 
 ### Adding or updating (upserting) a new user
 
-Send a `POST` request to `/users/` with header set to `Content-Type: applicatin/json` and body as:
+Send a `POST` request to `/users/` with header set to
+`Content-Type: applicatin/json` and body as:
 
 ```json
 {
@@ -75,7 +80,8 @@ As a `curl`:
 curl https://localhost:8000/users/email/andy@deno.com
 ```
 
-Or you can visit `https://localhost:8000/users/email/andy@deno.com` in your browser.
+Or you can visit `https://localhost:8000/users/email/andy@deno.com` in your
+browser.
 
 ### Getting address by user id
 
@@ -97,7 +103,8 @@ Or you can visit `https://localhost:8000/users/1/address` in your browser.
 POST /users/:id/address
 ```
 
-Send a `POST` request to `/users/:id/address` where `:id` is the user id, with header set to `Content-Type: applicatin/json` and body as:
+Send a `POST` request to `/users/:id/address` where `:id` is the user id, with
+header set to `Content-Type: applicatin/json` and body as:
 
 ```json
 {
@@ -123,4 +130,3 @@ As an example `curl` command:
 ```bash
 curl -X DELETE https://localhost:8000/users/1
 ```
-

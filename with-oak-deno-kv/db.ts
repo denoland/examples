@@ -1,4 +1,3 @@
-
 export interface User {
   id: string;
   email: string;
@@ -39,10 +38,12 @@ export async function upsertUser(user: User) {
 
 export async function updateUserAndAddress(user: User, address: Address) {
   const userKey = ["user", user.id];
+  const userByEmailKey = ["user_by_email", user.email];
   const addressKey = ["user", user.id, "address"];
 
   await kv.atomic()
     .set(userKey, user)
+    .set(userByEmailKey, user)
     .set(addressKey, address)
     .commit();
 }
@@ -100,5 +101,10 @@ export async function getAddressByUserId(id: string) {
  */
 
 export async function deleteUserById(id: string) {
-  await kv.delete(["user", id]);
+  const res = await kv.get(["user", id]);
+  await kv.atomic()
+    .delete(["user", id])
+    .delete(["user_by_email", res.value.email])
+    .delete(["user", id, "address"])
+    .commit();
 }

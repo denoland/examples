@@ -1,16 +1,45 @@
 
-import { Application, Router } from "https://deno.land/x/oak@v12.4.0/mod.ts";
-import todoController from "./todos.ts";
+import { Application, Router, Context, helpers } from "https://deno.land/x/oak@v12.4.0/mod.ts";
+import { getAllUsers, upsertUser, updateUserAndAddress, getUserByEmail, getUserById, deleteUserById, getAddressByUserId } from "./db.ts";
 
+const { getQuery } = helpers;
 const router = new Router();
+
 router
-  .get("/api/", todoController.getAllTodoItems)
-  .get("/api/:id", todoController.getTodoItem)
-  .post("/api/", todoController.createTodoItem)
-  .post("/api/:id", todoController.checkOffTodoItem)
-  .delete("/api/:id", todoController.deleteTodoItem)
+  .get("/users", async (ctx: Context) => {
+    ctx.response.body = await getAllUsers();
+  })
+  .get("/users/:id", async (ctx: Context)=> {
+    const { id } = getQuery(ctx, { mergeParams: true });
+    ctx.response.body = await getUserById(id);
+  })
+  .get("/users/email/:email", async (ctx: Context) => {
+    const { email } = getQuery(ctx, { mergeParams: true });
+    ctx.response.body = await getUserByEmail(email);
+  })
+  .get("/users/:id/address", async (ctx: Context) => {
+    const { id } = getQuery(ctx, { mergeParams: true });
+    ctx.response.body = await getAddressByUserId(id);
+  })
+  .post("/users", async (ctx: Context) => {
+    const body = ctx.request.body();
+    const user = await body.value;
+    await upsertUser(user);
+  })
+  .post("/users/:id/address", async (ctx: Context) => {
+    const { id } = getQuery(ctx, { mergeParams: true });
+    const body = ctx.request.body();
+    const address = await body.value;
+    const user = await getUserById(id);
+    await updateUserAndAddress(user, address);
+  })
+  .delete("/users/:id", async (ctx: Context) => {
+    const { id } = getQuery(ctx, { mergeParams: true });
+    await deleteUserById(id);
+  })
 
 const app = new Application();
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 

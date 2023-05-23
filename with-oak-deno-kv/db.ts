@@ -24,7 +24,12 @@ const kv = await Deno.openKv();
 export async function upsertUser(user: User) {
   const primary = ["user", user.id];
   const secondary = ["user_by_email", user.email];
+
+  const [userRes, userFromEmailRes] = await kv.getMany([primary, secondary]);
+
   await kv.atomic()
+    .check(userRes)
+    .check(userFromEmailRes)
     .set(primary, user)
     .set(secondary, user)
     .commit();
@@ -39,9 +44,14 @@ export async function upsertUser(user: User) {
 export async function updateUserAndAddress(user: User, address: Address) {
   const userKey = ["user", user.id];
   const userByEmailKey = ["user_by_email", user.email];
-  const addressKey = ["user", user.id, "address"];
+  const addressKey = ["user_address", user.id];
+
+  const [userRes, userFromEmailRes, addressRes] = await kv.getMany([userKey, userByEmailKey, addressKey]);
 
   await kv.atomic()
+    .check(userRes)
+    .check(userFromEmailRes)
+    .check(addressRes)
     .set(userKey, user)
     .set(userByEmailKey, user)
     .set(addressKey, address)
@@ -91,7 +101,7 @@ export async function getUserByEmail(email: string) {
  */
 
 export async function getAddressByUserId(id: string) {
-  const key = ["user", id, "address"];
+  const key = ["user_address", id];
   return (await kv.get(key)).value as Address;
 }
 
@@ -101,10 +111,19 @@ export async function getAddressByUserId(id: string) {
  */
 
 export async function deleteUserById(id: string) {
-  const res = await kv.get(["user", id]);
+  const userKey = ["user", id];
+  const userRes = await kv.get(userKey);
+  const userByEmailKey = ["user_by_email", userRes.value.email];
+  const addressKey = ["user_address", id];
+
+  const [userFromEmailRes, addressRes] = await kv.getMany([userByEmailKey, addressKey]);
+
   await kv.atomic()
-    .delete(["user", id])
-    .delete(["user_by_email", res.value.email])
-    .delete(["user", id, "address"])
+    .check(userRes)
+    .check(userFromEmailRes)
+    .check(addressRes)
+    .delete(userKey)
+    .delete(userByEmailKey)
+    .delete(addressKey)
     .commit();
 }

@@ -46,7 +46,11 @@ export async function updateUserAndAddress(user: User, address: Address) {
   const userByEmailKey = ["user_by_email", user.email];
   const addressKey = ["user_address", user.id];
 
-  const [userRes, userFromEmailRes, addressRes] = await kv.getMany([userKey, userByEmailKey, addressKey]);
+  const [userRes, userFromEmailRes, addressRes] = await kv.getMany([
+    userKey,
+    userByEmailKey,
+    addressKey,
+  ]);
 
   await kv.atomic()
     .check(userRes)
@@ -59,15 +63,17 @@ export async function updateUserAndAddress(user: User, address: Address) {
 }
 
 /**
- * Get all users.
+ * Get all users with pagination.
  * @returns <User>
  */
 
 export async function getAllUsers() {
-  const iter = await kv.list<User>({ prefix: ["user"] });
+  let iter = await kv.list<User>({ prefix: ["user"] });
   const users = [];
-  for await (const res of iter) {
-    if (res.value.id) users.push(res.value);
+  for await (const res of iter) users.push(res.value);
+  while (iter.cursor) {
+    iter = await kv.list<User>({ prefix: ["user"] }, { cursor: iter.cursor });
+    for await (const res of iter) users.push(res.value);
   }
   return users;
 }
@@ -116,7 +122,10 @@ export async function deleteUserById(id: string) {
   const userByEmailKey = ["user_by_email", userRes.value.email];
   const addressKey = ["user_address", id];
 
-  const [userFromEmailRes, addressRes] = await kv.getMany([userByEmailKey, addressKey]);
+  const [userFromEmailRes, addressRes] = await kv.getMany([
+    userByEmailKey,
+    addressKey,
+  ]);
 
   await kv.atomic()
     .check(userRes)

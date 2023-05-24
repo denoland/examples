@@ -1,4 +1,3 @@
-import { db } from "https://deno.land/std@0.185.0/media_types/_db.ts";
 
 export interface User {
   id: string;

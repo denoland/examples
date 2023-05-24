@@ -1,3 +1,5 @@
+import { db } from "https://deno.land/std@0.185.0/media_types/_db.ts";
+
 export interface User {
   id: string;
   email: string;
@@ -22,17 +24,27 @@ const kv = await Deno.openKv();
  */
 
 export async function upsertUser(user: User) {
-  const primary = ["user", user.id];
-  const secondary = ["user_by_email", user.email];
+  const userKey = ["user", user.id];
+  const userByEmailKey = ["user_by_email", user.email];
 
-  const [userRes, userFromEmailRes] = await kv.getMany([primary, secondary]);
+  const oldUser = await kv.get<User>(userKey);
 
-  await kv.atomic()
-    .check(userRes)
-    .check(userFromEmailRes)
-    .set(primary, user)
-    .set(secondary, user)
-    .commit();
+  const op = kv.atomic();
+  if (!oldUser.value) {
+    op.check(oldUser)
+      .set(userByEmailKey, user.id)
+      .set(userKey, user);
+  } else {
+    op.check(oldUser)
+      .delete(userByEmailKey, oldUser.value.email)
+      .set(userByEmailKey, user.id)
+      .set(userKey, user);
+  }
+
+  let res = { ok: false };
+  while (!res.ok) {
+    res = await op.commit();
+  }
 }
 
 /**
@@ -46,34 +58,36 @@ export async function updateUserAndAddress(user: User, address: Address) {
   const userByEmailKey = ["user_by_email", user.email];
   const addressKey = ["user_address", user.id];
 
-  const [userRes, userFromEmailRes, addressRes] = await kv.getMany([
-    userKey,
-    userByEmailKey,
-    addressKey,
-  ]);
+  const oldUser = await kv.get<User>(userKey);
 
-  await kv.atomic()
-    .check(userRes)
-    .check(userFromEmailRes)
-    .check(addressRes)
-    .set(userKey, user)
-    .set(userByEmailKey, user)
-    .set(addressKey, address)
-    .commit();
+  const op = kv.atomic();
+  if (!oldUser.value) {
+    op.check(oldUser)
+      .set(userByEmailKey, user.id)
+      .set(userKey, user)
+      .set(addressKey, address);
+  } else {
+    op.check(oldUser)
+      .delete(userByEmailKey, oldUser.value.email)
+      .set(userByEmailKey, user.id)
+      .set(userKey, user)
+      .set(addressKey, address);
+  }
+  let res = { ok: false };
+  while (!res.ok) {
+    res = await op.commit();
+  }
 }
 
 /**
- * Get all users with pagination.
+ * Get all users.
  * @returns <User>
  */
 
 export async function getAllUsers() {
-  let iter = await kv.list<User>({ prefix: ["user"] });
   const users = [];
-  for await (const res of iter) users.push(res.value);
-  while (iter.cursor) {
-    iter = await kv.list<User>({ prefix: ["user"] }, { cursor: iter.cursor });
-    for await (const res of iter) users.push(res.value);
+  for await (const res of kv.list({ prefix: ["user"] })) {
+    users.push(res.value);
   }
   return users;
 }
@@ -96,8 +110,10 @@ export async function getUserById(id: string): Promise<User> {
  */
 
 export async function getUserByEmail(email: string) {
-  const key = ["user_by_email", email];
-  return (await kv.get(key)).value as User;
+  const userByEmailKey = ["user_by_email", email];
+  const id = (await kv.get(userByEmailKey)).value as string;
+  const userKey = ["user", id];
+  return (await kv.get(userKey)).value as User;
 }
 
 /**
@@ -118,21 +134,23 @@ export async function getAddressByUserId(id: string) {
 
 export async function deleteUserById(id: string) {
   const userKey = ["user", id];
-  const userRes = await kv.get(userKey);
-  const userByEmailKey = ["user_by_email", userRes.value.email];
+  const oldUser = await kv.get<User>(userKey);
+  const userByEmailKey = ["user_by_email", oldUser.value.email];
+  const oldUserIdByEmail = await kv.get(userByEmailKey);
   const addressKey = ["user_address", id];
 
-  const [userFromEmailRes, addressRes] = await kv.getMany([
-    userByEmailKey,
-    addressKey,
-  ]);
+  if (id !== oldUserIdByEmail.value) {
+    throw new Error("User by email does not match user.");
+  }
 
-  await kv.atomic()
-    .check(userRes)
-    .check(userFromEmailRes)
-    .check(addressRes)
-    .delete(userKey)
-    .delete(userByEmailKey)
-    .delete(addressKey)
-    .commit();
+  let res = { ok: false };
+  while (!res.ok) {
+    res = await kv.atomic()
+      .check(oldUser)
+      .check(oldUserIdByEmail)
+      .delete(userKey)
+      .delete(userByEmailKey)
+      .delete(addressKey)
+      .commit();
+  }
 }

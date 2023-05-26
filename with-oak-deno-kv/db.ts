@@ -39,10 +39,7 @@ export async function upsertUser(user: User) {
       .set(userKey, user);
   }
 
-  let res = { ok: false };
-  while (!res.ok) {
-    res = await op.commit();
-  }
+  return await op.commit();
 }
 
 /**
@@ -71,10 +68,7 @@ export async function updateUserAndAddress(user: User, address: Address) {
       .set(userKey, user)
       .set(addressKey, address);
   }
-  let res = { ok: false };
-  while (!res.ok) {
-    res = await op.commit();
-  }
+  return await op.commit();
 }
 
 /**
@@ -132,23 +126,15 @@ export async function getAddressByUserId(id: string) {
 
 export async function deleteUserById(id: string) {
   const userKey = ["user", id];
-  const oldUser = await kv.get<User>(userKey);
-  const userByEmailKey = ["user_by_email", oldUser.value.email];
-  const oldUserIdByEmail = await kv.get(userByEmailKey);
+  const userRes = await kv.get(userKey);
+  if (!userRes.value) return;
+  const userByEmailKey = ["user_by_email", userRes.value.email];
   const addressKey = ["user_address", id];
 
-  if (id !== oldUserIdByEmail.value) {
-    throw new Error("User by email does not match user.");
-  }
-
-  let res = { ok: false };
-  while (!res.ok) {
-    res = await kv.atomic()
-      .check(oldUser)
-      .check(oldUserIdByEmail)
-      .delete(userKey)
-      .delete(userByEmailKey)
-      .delete(addressKey)
-      .commit();
-  }
+  await kv.atomic()
+    .check(userRes)
+    .delete(userKey)
+    .delete(userByEmailKey)
+    .delete(addressKey)
+    .commit();
 }

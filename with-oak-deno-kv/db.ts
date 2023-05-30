@@ -27,19 +27,22 @@ export async function upsertUser(user: User) {
 
   const oldUser = await kv.get<User>(userKey);
 
-  const op = kv.atomic();
   if (!oldUser.value) {
-    op.check(oldUser)
+    const ok = await kv.atomic()
+      .check(oldUser)
       .set(userByEmailKey, user.id)
-      .set(userKey, user);
+      .set(userKey, user)
+      .commit();
+    if (!ok) throw Error;
   } else {
-    op.check(oldUser)
+    const ok = await kv.atomic()
+      .check(oldUser)
       .delete(userByEmailKey, oldUser.value.email)
       .set(userByEmailKey, user.id)
-      .set(userKey, user);
+      .set(userKey, user)
+      .commit();
+    if (!ok) throw Error;
   }
-
-  return await op.commit();
 }
 
 /**
@@ -55,20 +58,24 @@ export async function updateUserAndAddress(user: User, address: Address) {
 
   const oldUser = await kv.get<User>(userKey);
 
-  const op = kv.atomic();
   if (!oldUser.value) {
-    op.check(oldUser)
+    const ok = await kv.atomic()
+      .check(oldUser)
       .set(userByEmailKey, user.id)
       .set(userKey, user)
-      .set(addressKey, address);
+      .set(addressKey, address)
+      .commit();
+    if (!ok) throw Error;
   } else {
-    op.check(oldUser)
+    const ok = await kv.atomic()
+      .check(oldUser)
       .delete(userByEmailKey, oldUser.value.email)
       .set(userByEmailKey, user.id)
       .set(userKey, user)
-      .set(addressKey, address);
+      .set(addressKey, address)
+      .commit();
+    if (!ok) throw Error;
   }
-  return await op.commit();
 }
 
 /**

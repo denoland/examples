@@ -33,7 +33,7 @@ export async function upsertUser(user: User) {
       .set(userByEmailKey, user.id)
       .set(userKey, user)
       .commit();
-    if (!ok) throw Error;
+    if (!ok) throw new Error("Something went wrong.");
   } else {
     const ok = await kv.atomic()
       .check(oldUser)
@@ -41,7 +41,7 @@ export async function upsertUser(user: User) {
       .set(userByEmailKey, user.id)
       .set(userKey, user)
       .commit();
-    if (!ok) throw Error;
+    if (!ok) throw new Error("Something went wrong.");
   }
 }
 
@@ -65,7 +65,7 @@ export async function updateUserAndAddress(user: User, address: Address) {
       .set(userKey, user)
       .set(addressKey, address)
       .commit();
-    if (!ok) throw Error;
+    if (!ok) throw new Error("Something went wrong.");
   } else {
     const ok = await kv.atomic()
       .check(oldUser)
@@ -74,7 +74,7 @@ export async function updateUserAndAddress(user: User, address: Address) {
       .set(userKey, user)
       .set(addressKey, address)
       .commit();
-    if (!ok) throw Error;
+    if (!ok) throw new Error("Something went wrong.");
   }
 }
 

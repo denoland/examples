@@ -37,7 +37,7 @@ export async function upsertUser(user: User) {
   } else {
     const ok = await kv.atomic()
       .check(oldUser)
-      .delete(userByEmailKey, oldUser.value.email)
+      .delete(["user_by_email", oldUser.value.email])
       .set(userByEmailKey, user.id)
       .set(userKey, user)
       .commit();
@@ -69,7 +69,7 @@ export async function updateUserAndAddress(user: User, address: Address) {
   } else {
     const ok = await kv.atomic()
       .check(oldUser)
-      .delete(userByEmailKey, oldUser.value.email)
+      .delete(["user_by_email", oldUser.value.email])
       .set(userByEmailKey, user.id)
       .set(userKey, user)
       .set(addressKey, address)

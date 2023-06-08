@@ -1,2 +1,5 @@
+#ide
+.vscode
 
+#misc
 .DS_Store

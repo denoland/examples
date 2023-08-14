@@ -1,10 +1,10 @@
-# How to use Planetscale with Deno
+# How to use PlanetScale with Deno
 
-Planetscale is a MySQL-compatible serverless database that is designed with a
+PlanetScale is a MySQL-compatible serverless database that is designed with a
 developer workflow where developers can create, branch, and deploy databases
 from the command line.
 
-We’ll use the Planetscale serverless driver, `@planetscale/database`, to work
+We’ll use the PlanetScale serverless driver, `@planetscale/database`, to work
 with Deno. First we want to create `main.ts` and import the connect method from
 this package:
 
@@ -15,7 +15,7 @@ import { connect } from "npm:@planetscale/database@^1.4";
 ## Configuring our connection
 
 The connection requires three credentials: host, username, and password. These
-are database-specific, so we first need to create a database in Planetscale. You
+are database-specific, so we first need to create a database in PlanetScale. You
 can do that by following the initial instructions
 [here](https://planetscale.com/docs/tutorials/planetscale-quick-start-guide).
 Don’t worry about adding the schema—we can do that through
@@ -52,7 +52,7 @@ dashboard. Run with:
 deno run --allow-net --allow-env main.ts
 ```
 
-The `conn` object is now an open connection to our Planetscale database.
+The `conn` object is now an open connection to our PlanetScale database.
 
 ## Creating and populating our database table
 
@@ -68,7 +68,7 @@ await conn.execute(
 );
 ```
 
-## Querying Planetscale
+## Querying PlanetScale
 
 We can use same `conn.execute()` to also write our queries. Let’s get a list of
 all our dinosaurs:
@@ -112,5 +112,5 @@ Which gives us a single row result:
 [{ id: 3, name: "Deno", description: "The fastest dinosaur that ever lived." }];
 ```
 
-You can find out more about working with Planetscale in their
+You can find out more about working with PlanetScale in their
 [docs](https://planetscale.com/docs).

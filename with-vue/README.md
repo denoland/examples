@@ -24,7 +24,7 @@ deno task dev
 
 You should now be able to view your default Deno and Vue app in your browser:
 
-![default vue app](/static/default-vue-app.png)
+![default vue app](/with-vue/static/default-vue-app.png)
 
 ## Add a backend
 
@@ -88,7 +88,7 @@ deno run --allow-env --allow-net api/main.ts
 
 If we go to `localhost:8000/api`, we see:
 
-![json response of dinosaurs](/static/api-response.png)
+![json response of dinosaurs](/with-vue/static/api-response.png)
 
 Lookin' good so far.
 
@@ -112,7 +112,8 @@ Before we create the components, let's add some state management.
 
 In order to maintain state across our `<Dinosaur>` and `<Dinosaurs>` components,
 we'll use [Vue store](https://vuejs.org/guide/scaling-up/state-management.html).
-Note for more complex state management, check out the Vue-endorsed
+
+> **Note**: for more complex state management, check out the Vue-endorsed
 [Pinia](https://pinia.vuejs.org/) library.
 
 Create a `src/store.js` file:
@@ -352,6 +353,6 @@ app.mount("#app");
 
 Let's run it and see what we get so far:
 
-![Clicking on a dinosaur to get to an individual dinosaur page](/static/vue-demo.gif)
+![Clicking on a dinosaur to get to an individual dinosaur page](/with-vue/static/vue-demo.gif)
 
 Awesome!

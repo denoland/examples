@@ -48,7 +48,7 @@ Then, let's update `api/main.ts`:
 ```ts
 import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
 import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 router
@@ -114,7 +114,7 @@ In order to maintain state across our `<Dinosaur>` and `<Dinosaurs>` components,
 we'll use [Vue store](https://vuejs.org/guide/scaling-up/state-management.html).
 
 > **Note**: for more complex state management, check out the Vue-endorsed
-[Pinia](https://pinia.vuejs.org/) library.
+> [Pinia](https://pinia.vuejs.org/) library.
 
 Create a `src/store.js` file:
 

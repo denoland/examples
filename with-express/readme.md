@@ -59,7 +59,7 @@ Next, let's import that data into `main.ts`. Let's add this line at the top of
 the file:
 
 ```ts
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 ```
 
 Then, we can create the routes to access that data. To keep it simple, let's

@@ -48,7 +48,7 @@ Then, let's update `api/main.ts`:
 ```ts
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 
 const router = new Router();
 router

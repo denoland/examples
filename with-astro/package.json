@@ -1,5 +1,5 @@
 {
-  "name": "terrestrial-tower",
+  "name": "pink-pulsar",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,7 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.16.5",
+    "@astrojs/node": "^8.3.4",
+    "astro": "^4.16.7",
     "@astrojs/check": "^0.9.4",
     "typescript": "^5.6.3"
   }

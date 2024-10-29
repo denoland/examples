@@ -1,0 +1,13 @@
+---
+import data from "../../data/dinosaurs.json";
+const { dinosaur } = Astro.params;
+const dinosaurObj = data.find((item) => item.name.toLowerCase() === dinosaur);
+if (!dinosaurObj) return Astro.redirect("/404");
+const { name, description } = dinosaurObj;
+---
+
+<h1>{ name }</h1>
+
+<p>
+    { description }
+</p>

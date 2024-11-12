@@ -5,16 +5,13 @@ import pg from "pg";
 import { integer } from "drizzle-orm/sqlite-core";
 import { eq } from "drizzle-orm/expressions";
 
-const { Client } = pg;
+const { Pool } = pg;
 
 // Instantiate Drizzle client.
 export const db = drizzle({
-  // Using `connectionString` to instantiate a client results in Top-level await promise never resolved error.
-  client: new Client({
+  client: new Pool({
     connectionString: Deno.env.get("DATABASE_URL"),
   }),
-
-  // The below works.
   schema: { dinosaurSchema, taskSchema, dinosaursRelations, tasksRelations },
 });
 

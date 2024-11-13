@@ -14,11 +14,16 @@ For general instructions on using Deno, please refer to
 - [MySQL2](https://github.com/denoland/examples/tree/main/with-mysql2)
 - [PlanetScale](https://github.com/denoland/examples/tree/main/with-planetscale)
 - [Prisma](https://github.com/denoland/examples/tree/main/with-prisma)
+- [Drizzle ORM](https://github.com/denoland/examples/tree/main/with-drizzle)
 
 ## Frontend Frameworks
 
 - [React](https://github.com/denoland/examples/tree/main/with-react)
 - [Vue](https://github.com/denoland/examples/tree/main/with-vue)
+
+# API Frameworks
+
+- [tRPC](https://github.com/denoland/examples/tree/main/with-trpc)
 
 ## Cloud Deployments
 

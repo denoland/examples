@@ -20,6 +20,8 @@ For general instructions on using Deno, please refer to
 
 - [React](https://github.com/denoland/examples/tree/main/with-react)
 - [Vue](https://github.com/denoland/examples/tree/main/with-vue)
+- [SolidJS](https://github.com/denoland/examples/tree/main/with-solidjs)
+- [Astro](https://github.com/denoland/examples/tree/main/with-astro)
 
 # API Frameworks
 

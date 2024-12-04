@@ -1,0 +1,13 @@
+.dinosaur {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dinosaur:hover {
+  background-color: #f0f0f0;
+}

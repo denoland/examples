@@ -4,7 +4,11 @@
     "dev:api": "deno run --allow-env --allow-net --allow-read api/main.ts",
     "dev:vite": "deno run -A npm:vite",
     "build": "deno run -A npm:vite build",
-    "serve": "deno task build && deno task dev:api"
+    "serve": {
+      "command": "deno task dev:api",
+      "description": "Run the build, and then start the API server",
+      "dependencies": ["deno task build"]
+    }
   },
   "imports": {
     "@hono/hono": "jsr:@hono/hono@^4.6.12",

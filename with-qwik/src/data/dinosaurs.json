@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Tyrannosaurus Rex",
+    "description": "A massive carnivorous dinosaur with powerful jaws and tiny arms."
+  },
+  {
+    "name": "Brachiosaurus",
+    "description": "A huge herbivorous dinosaur with a very long neck."
+  },
+  {
+    "name": "Velociraptor",
+    "description": "A small but fierce predator that hunted in packs."
+  }
+]

@@ -1,7 +1,7 @@
 import data from "../data.json";
 
 export default defineCachedEventHandler((event) => {
-    const name = event.context.params?.name;
+    const name = getRouterParam(event, 'name');
 
     if (!name) {
         throw createError({

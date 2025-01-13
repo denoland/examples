@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import type { Dino } from "~/types";
-import { useFetch } from "nuxt/app";
-
-const { data: dinosaurs } = await useFetch<Dino[]>("/api/dinosaurs");
+const { data: dinosaurs } = await useFetch("/api/dinosaurs");
 </script>
 
 <template>

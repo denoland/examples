@@ -1,9 +1,7 @@
-import { defineCachedEventHandler } from "#imports";
 import data from "../data.json";
-import { H3Event } from "h3";
 
-export default defineCachedEventHandler((event: H3Event) => {
-    const name = event.context.params?.name;
+export default defineCachedEventHandler((event) => {
+    const name = getRouterParam(event, 'name');
 
     if (!name) {
         throw createError({

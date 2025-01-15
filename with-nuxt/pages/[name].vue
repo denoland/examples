@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import type { Dino } from "~/types";
-import { useFetch, useRoute } from "nuxt/app";
-
 const route = useRoute();
-const { data: dinosaur } = await useFetch<Dino>(
+const { data: dinosaur } = await useFetch(
   `/api/dinosaurs/${route.params.name}`
 );
 </script>

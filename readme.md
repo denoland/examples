@@ -15,6 +15,7 @@ For general instructions on using Deno, please refer to
 - [PlanetScale](https://github.com/denoland/examples/tree/main/with-planetscale)
 - [Prisma](https://github.com/denoland/examples/tree/main/with-prisma)
 - [Drizzle ORM](https://github.com/denoland/examples/tree/main/with-drizzle)
+- [Redis](https://github.com/denoland/examples/tree/main/with-redis)
 
 ## Frontend Frameworks
 
@@ -22,6 +23,9 @@ For general instructions on using Deno, please refer to
 - [Vue](https://github.com/denoland/examples/tree/main/with-vue)
 - [SolidJS](https://github.com/denoland/examples/tree/main/with-solidjs)
 - [Astro](https://github.com/denoland/examples/tree/main/with-astro)
+- [Tanstack](https://github.com/denoland/examples/tree/main/with-tanstack)
+- [Nuxt](https://github.com/denoland/examples/tree/main/with-nuxt)
+- [Qwik](https://github.com/denoland/examples/tree/main/with-qwik)
 
 # API Frameworks
 

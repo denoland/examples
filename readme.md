@@ -36,3 +36,7 @@ For general instructions on using Deno, please refer to
 - [Digital Ocean](https://github.com/denoland/examples/tree/main/on-digital-ocean)
 - [AWS Lightsail](https://github.com/denoland/examples/tree/main/on-aws-lightsail)
 - [Google Cloud Run](https://github.com/denoland/examples/tree/main/on-google-cloud-run)
+
+## OpenTelemetry
+
+- [Honeycomb](https://github.com/denoland/examples/tree/main/with-honeycomb)

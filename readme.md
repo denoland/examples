@@ -40,3 +40,4 @@ For general instructions on using Deno, please refer to
 ## OpenTelemetry
 
 - [Honeycomb](https://github.com/denoland/examples/tree/main/with-honeycomb)
+- [Hyperdx](https://github.com/denoland/examples/tree/main/with-hyperdx)

@@ -10,7 +10,7 @@ exporters:
   otlp:
     endpoint: "api.honeycomb.io:443"
     headers:
-      x-honeycomb-team: "WbbEfEtjBWLwjp9xEWwtXD"
+      x-honeycomb-team: "YOUR_HONEYCOMB_API_KEY"
 
 processors:
   batch:

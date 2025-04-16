@@ -1,7 +1,4 @@
-import express from "express";
-
-const app = express();
-const port = Deno.env.get("PORT") || 8000;
+const port = 8000;
 const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
 if (!OPENAI_API_KEY) {
@@ -9,13 +6,8 @@ if (!OPENAI_API_KEY) {
   Deno.exit(1);
 }
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// Serve static HTML
-app.get("/", (_req, res) => {
-  console.log("Serving the chat interface...");
-  res.send(`<!DOCTYPE html>
+// HTML content for the chat interface
+const htmlContent = `<!DOCTYPE html>
 <html>
 <head>
     <title>ChatGPT Interface</title>
@@ -88,50 +80,78 @@ app.get("/", (_req, res) => {
         }
     </script>
 </body>
-</html>`);
-});
+</html>`;
 
-// Chat API endpoint
-app.post("/api/chat", async (req, res) => {
-  try {
-    const { prompt } = req.body;
-    console.log("Prompt:", prompt);
+// Use Deno.serve for the HTTP server
+Deno.serve({ port }, async (request) => {
+  const url = new URL(request.url);
+  const path = url.pathname;
 
-    // Add your hardcoded system prompt here
-    const systemPrompt =
-      "You are a helpful AI assistant. Please provide clear and concise responses.";
-
-    console.log("Sending request to OpenAI...");
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: prompt },
-        ],
-      }),
-    });
-
-    console.log("Received response from OpenAI");
-    const data = await response.json();
-
-    res.json({
-      response: data.choices[0].message.content,
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({
-      error: error.message,
+  // Handle root path - serve HTML content
+  if (path === "/" && request.method === "GET") {
+    console.log("Serving the chat interface...");
+    return new Response(htmlContent, {
+      headers: { "Content-Type": "text/html" },
     });
   }
+
+  // Handle chat API endpoint
+  if (path === "/api/chat" && request.method === "POST") {
+    try {
+      const { prompt } = await request.json();
+      console.log("Prompt:", prompt);
+
+      // Add your hardcoded system prompt here
+      const systemPrompt =
+        "You are a helpful AI assistant. Please provide clear and concise responses.";
+
+      console.log("Sending request to OpenAI...");
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${OPENAI_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "system", content: systemPrompt },
+              { role: "user", content: prompt },
+            ],
+          }),
+        },
+      );
+
+      console.log("Received response from OpenAI");
+      const data = await response.json();
+
+      console.log(data);
+      return new Response(
+        JSON.stringify({
+          response: data.choices[0].message.content,
+        }),
+        { headers: { "Content-Type": "application/json" } },
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error:", error.message);
+      } else {
+        console.error("Unknown error:", error);
+      }
+      return new Response(
+        JSON.stringify({ error: error }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
+  }
+
+  // Handle 404 for any other routes
+  return new Response("Not Found", { status: 404 });
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+console.log(`Server is running on http://localhost:${port}`);

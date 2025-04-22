@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "start": "deno --allow-env --allow-net --env-file main.ts",
+    "otel": "OTEL_DENO=true OTEL_SERVICE_NAME=chat-app deno run --unstable-otel --allow-net --allow-read --allow-env --env-file main.ts"
+  }
+}

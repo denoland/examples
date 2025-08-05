@@ -10,9 +10,37 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Dinosaur Encyclopedia",
+      link: [
+        {
+          rel: "preload",
+          href: "https://demo-styles.deno.deno.net/fonts/Moranga-Regular.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "preload",
+          href: "https://demo-styles.deno.deno.net/fonts/Moranga-Medium.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "preload",
+          href: "https://demo-styles.deno.deno.net/fonts/Recursive_Variable.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossorigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://demo-styles.deno.deno.net/styles.css",
+          type: "text/css",
+          crossorigin: "anonymous",
+        },
+      ],
     },
   },
-
   css: ["~/assets/css/main.css"],
 
   postcss: {

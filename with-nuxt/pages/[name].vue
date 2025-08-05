@@ -9,7 +9,7 @@ const { data: dinosaur } = await useFetch(
   <main v-if="dinosaur">
     <h1 class="text-2xl font-bold mb-4">{{ dinosaur.name }}</h1>
     <p class="mb-4">{{ dinosaur.description }}</p>
-    <NuxtLink to="/" class="text-blue-600 hover:text-blue-800 hover:underline">
+    <NuxtLink to="/" class="btn-secondary">
       Back to all dinosaurs
     </NuxtLink>
   </main>

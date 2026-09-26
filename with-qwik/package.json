@@ -11,6 +11,9 @@
   ],
   "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
   "type": "module",
+  "overrides": {
+    "sharp": "0.35.4"
+  },
   "scripts": {
     "build": "qwik build",
     "build.client": "vite build",
@@ -27,18 +30,18 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.9.1",
-    "@builder.io/qwik-city": "^1.9.1",
+    "@builder.io/qwik": "^1.20.1",
+    "@builder.io/qwik-city": "^1.20.1",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "eslint": "8.57.0",
-    "eslint-plugin-qwik": "^1.9.1",
+    "eslint-plugin-qwik": "^1.20.1",
     "prettier": "3.3.3",
     "typescript": "5.4.5",
     "undici": "*",
-    "vite": "5.3.5",
+    "vite": "6.4.3",
     "vite-tsconfig-paths": "^4.2.1"
   }
 }
